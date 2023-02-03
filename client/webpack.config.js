@@ -1,7 +1,7 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackPwaManifest = require('webpack-pwa-manifest');
 const path = require('path');
-//const { InjectManifest } = require('workbox-webpack-plugin');
+const { InjectManifest } = require('workbox-webpack-plugin');
 const { GenerateSW } = require('workbox-webpack-plugin');
 
 // TODO: Agregar y configurar complementos del workbox para un service worker y un archivo de manifiesto.
@@ -23,7 +23,12 @@ module.exports = () => {
                   template: './index.html',
                   title: 'JATE'
                 }),
-                new GenerateSW(),
+                //new GenerateSW(),
+                // Inyecta nuestro service worker personalizado
+                new InjectManifest({
+                  swSrc: './src-sw.js',
+                  swDest: 'src-sw.js',
+                }),
                 new WebpackPwaManifest({
                   name: 'JATE',
                   short_name: 'JATE',
@@ -50,7 +55,7 @@ module.exports = () => {
                   use: ['style-loader', 'css-loader'],
                 },
                 {
-                  test: /\.(png|svg|jpg|jpeg|gif)$/i,
+                  test: /\.(png|svg|jpg|jpeg|gif|ico)$/i,
                   type: 'asset/resource',
                 },        
                 {
@@ -59,7 +64,8 @@ module.exports = () => {
                   use: {
                     loader: 'babel-loader',
                     options: {
-                      presets: ['@babel/preset-env']
+                      presets: ['@babel/preset-env'],
+                      plugins: ['@babel/plugin-proposal-object-rest-spread', '@babel/transform-runtime']
                     }
                   }
                 }
