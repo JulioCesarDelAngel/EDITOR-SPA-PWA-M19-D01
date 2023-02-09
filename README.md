@@ -34,7 +34,7 @@
 * workbox-webpack-plugin
 
 ## Aplicación desplegada en Heroku
-* https://my_app.herokuapp.com/    
+* https://mighty-garden-98776.herokuapp.com
 
 ## Captura de pantalla de la aplicación
 ![Visualización de la aplicación](https://github.com/JulioCesarDelAngel/EDITOR-SPA-PWA-M19-D01/blob/main/assets/images/EDITOR-SPA-PWA-M19-D01.png)
